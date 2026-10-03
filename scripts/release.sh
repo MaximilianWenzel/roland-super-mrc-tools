@@ -98,24 +98,13 @@ success "All quality gates passed!"
 info "Creating branch ${BOLD}$RELEASE_BRANCH${NC} from develop..."
 git checkout -b "$RELEASE_BRANCH" develop
 
-# Bump version in pyproject.toml and __init__.py
+# Bump version in pyproject.toml
 info "Bumping version to ${BOLD}$VERSION${NC}..."
 poetry version "$VERSION"
 
-poetry run python -c "
-from pathlib import Path
-import re
-
-init_file = Path('src/roland_super_mrc/__init__.py')
-if init_file.is_file():
-    text = init_file.read_text(encoding='utf-8')
-    new_text = re.sub(r'__version__\s*=\s*\"[^\"]+\"', f'__version__ = \"$VERSION\"', text)
-    init_file.write_text(new_text, encoding='utf-8')
-"
-
 # Commit version bump if there are changes
 if [ -n "$(git status --porcelain)" ]; then
-    git add pyproject.toml src/roland_super_mrc/__init__.py
+    git add pyproject.toml
     if [ -f poetry.lock ]; then
         git add poetry.lock
     fi
