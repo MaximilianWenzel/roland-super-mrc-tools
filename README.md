@@ -10,7 +10,7 @@ Converts raw binary `.SNG` floppy disk files into standard SMF Format 1 or Forma
 
 ### Installation
 
-**Option 1: Standalone Executable (Recommended — No Python required)**
+**Option 1: Standalone Executable (recommended — no Python required)**
 
 Download the pre-compiled binary for your OS from [Releases](https://github.com/MaximilianWenzel/roland-super-mrc-tools/releases):
 - **Windows:** Run `.\sng2mid.exe` from PowerShell or Command Prompt.
@@ -28,14 +28,14 @@ poetry install
 ### Convert a File
 
 ```bash
-# Convert a single song to SMF Format 1 (multi-track)
-sng2mid convert song.sng -o song.mid
+# Convert the included demo song to SMF Format 1 (multi-track)
+sng2mid convert examples/demo.sng -o demo.mid
 
 # Convert with verbose track inspection
-sng2mid convert song.sng -v
+sng2mid convert examples/demo.sng -v
 
 # Convert to SMF Format 0 (single unified track)
-sng2mid convert song.sng -f 0
+sng2mid convert examples/demo.sng -f 0
 ```
 
 ### Inspect Binary Metadata
@@ -43,15 +43,15 @@ sng2mid convert song.sng -f 0
 Display internal headers, measure counts, tempo maps, and track structures without writing a file:
 
 ```bash
-sng2mid inspect song.sng
+sng2mid inspect examples/demo.sng
 ```
 
 ### Batch Convert a Folder
 
-Convert an entire directory tree of floppy disk archives:
+Convert an entire floppy disk directory tree with automatic song title resolution:
 
 ```bash
-sng2mid batch /path/to/floppies -o /path/to/midi --recursive
+sng2mid batch examples/floppy_sample -o converted_midi/
 ```
 
 ---
@@ -65,7 +65,7 @@ from pathlib import Path
 from roland_super_mrc import parse_sng_file, write_midi_file
 
 # Parse raw binary SNG into an immutable SuperMrcSong model
-song = parse_sng_file(Path("AUTUMN.SNG"))
+song = parse_sng_file(Path("examples/demo.sng"))
 
 print(f"Title: {song.title}")
 print(f"Tempo: {song.initial_tempo_bpm} BPM ({song.time_signature[0]}/{song.time_signature[1]})")
@@ -73,7 +73,7 @@ print(f"Performance Tracks: {len(song.performance_tracks)}")
 print(f"Rhythm Measures: {song.measure_count} ({len(song.rhythm_events)} drum events)")
 
 # Export to Standard MIDI Format 1
-write_midi_file(song, Path("AUTUMN.mid"), format_type=1)
+write_midi_file(song, Path("demo.mid"), format_type=1)
 ```
 
 ---
