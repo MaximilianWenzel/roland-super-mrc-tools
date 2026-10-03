@@ -32,8 +32,6 @@ from roland_super_mrc.parser import parse_sng_bytes, parse_sng_file
 from roland_super_mrc.rhythm import decode_rhythm_stream, parse_drum_palette
 from roland_super_mrc.writer import serialize_to_midi, write_midi_file
 
-__version__ = "1.0.0"
-
 __all__ = [
     "CorruptHeaderError",
     "DecodedPattern",
