@@ -126,10 +126,10 @@ else
     success "Created tag $TAG."
 fi
 
-# Merge back into develop
-info "Merging ${BOLD}$RELEASE_BRANCH${NC} back into ${BOLD}develop${NC}..."
+# Merge main back into develop
+info "Merging ${BOLD}main${NC} back into ${BOLD}develop${NC}..."
 git checkout develop
-git merge --no-ff "$RELEASE_BRANCH" -m "chore(release): merge $RELEASE_BRANCH into develop"
+git merge main
 
 # Delete release branch
 info "Cleaning up temporary ${BOLD}$RELEASE_BRANCH${NC} branch..."

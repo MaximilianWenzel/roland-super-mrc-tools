@@ -10,7 +10,7 @@ Converts raw binary `.SNG` floppy disk files into standard SMF Format 1 or Forma
 
 ### Installation
 
-**Option 1: Standalone Executable (recommended — no Python required)**
+**Option 1: Standalone Executable (recommended, no Python required)**
 
 Download the pre-compiled binary for your OS from [Releases](https://github.com/MaximilianWenzel/roland-super-mrc-tools/releases):
 - **Windows:** Run `.\sng2mid.exe` from PowerShell or Command Prompt.
@@ -113,10 +113,8 @@ If you encounter an `.SNG` file that fails to parse or produces unexpected playb
 This project was developed through human-agent pair programming using Google DeepMind's Antigravity coding tools.
 
 Because proprietary binary formats require precise handling of edge cases, conversion fidelity is verified through automated test suites:
-- Unit tests covering binary edge cases (timing skips, signed velocity trims, rest bars, and variable tempos).
-- Comparison against native Roland MC-50 hardware SMF disk exports.
-- Strict static type checking (`mypy --strict`) and automated linting (`ruff`).
-- Pre-commit automated quality gates enforcing formatting, linting, and tests.
+- Synthetic binary test fixtures covering timing skips, signed velocity trims, rest bars, and dynamic tempo changes.
+- Comparative validation against native Roland MC-50 hardware SMF disk exports.
 
 ---
 
